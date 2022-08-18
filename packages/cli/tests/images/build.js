@@ -9,20 +9,20 @@ exports.default = {
 
 	'ssr-build/ssr-bundle.css': 1281,
 	'ssr-build/ssr-bundle.css.map': 2070,
-	'ssr-build/ssr-bundle.js': 9801,
-	'ssr-build/ssr-bundle.js.map': 30625,
+	'ssr-build/ssr-bundle.js': 14400,
+	'ssr-build/ssr-bundle.js.map': 46078,
 	'ssr-build/asset-manifest.json': 76,
 
-	'bundle.620ee.js': 21323,
-	'bundle.620ee.js.map': 85534,
-	'bundle.620ee.legacy.js': 22514,
-	'bundle.620ee.legacy.js.map': 106422,
+	'bundle.c7f4f.js': 26608,
+	'bundle.c7f4f.js.map': 107005,
+	'bundle.c7f4f.legacy.js': 28182,
+	'bundle.c7f4f.legacy.js.map': 133666,
 	'bundle.354c3.css': 945,
 	'bundle.354c3.css.map': 1758,
 
 	'dom-polyfills.c88f4.legacy.js': 5252,
 	'dom-polyfills.c88f4.legacy.js.map': 18836,
-	'es-polyfills.legacy.js': 42540,
+	'es-polyfills.legacy.js': 61323,
 
 	'favicon.ico': 15086,
 	'index.html': 2263,
@@ -30,19 +30,19 @@ exports.default = {
 	'preact_prerender_data.json': 11,
 	'asset-manifest.json': 943,
 
-	'route-home.chunk.4ad71.js': 339,
-	'route-home.chunk.4ad71.js.map': 1811,
-	'route-home.chunk.4ad71.legacy.js': 394,
-	'route-home.chunk.4ad71.legacy.js.map': 2102,
-	'route-home.chunk.6eaee.css': 112,
-	'route-home.chunk.6eaee.css.map': 224,
+	'routes-home.chunk.66725.js': 348,
+	'routes-home.chunk.66725.js.map': 1703,
+	'routes-home.chunk.66725.legacy.js': 394,
+	'routes-home.chunk.66725.legacy.js.map': 1991,
+	'routes-home.chunk.4c05c.css': 112,
+	'routes-home.chunk.4c05c.css.map': 224,
 
-	'route-profile.chunk.6a61d.js': 2545,
-	'route-profile.chunk.6a61d.js.map': 10268,
-	'route-profile.chunk.6a61d.legacy.js': 2698,
-	'route-profile.chunk.6a61d.legacy.js.map': 12894,
-	'route-profile.chunk.0af3e.css': 118,
-	'route-profile.chunk.0af3e.css.map': 231,
+	'routes-profile.chunk.948e4.js': 743,
+	'routes-profile.chunk.948e4.js.map': 3272,
+	'routes-profile.chunk.948e4.legacy.js': 910,
+	'routes-profile.chunk.948e4.legacy.js.map': 3931,
+	'routes-profile.chunk.0a57b.css': 118,
+	'routes-profile.chunk.0a57b.css.map': 231,
 };
 
 exports.prerender = {};
@@ -156,8 +156,10 @@ exports.template = `
 	<body>
 		<h1>Guess what</h1>
 		<h2>This is an app with custom template</h2>
+		<script type="isodata"></script>
 		<script defer="defer" src="/bundle.\\w{5}.js"></script>
 		<h2>This is an app with custom template</h2>
+		<script type="isodata"></script>
 		<script type="__PREACT_CLI_DATA__">%7B%22preRenderData%22:%7B%22url%22:%22/%22%7D%7D</script>
 		<script crossorigin="anonymous" src="/bundle.\\w{5}.js" type="module"></script>
 		<script nomodule="" src="/dom-polyfills.\\w{5}.legacy.js"></script>
@@ -182,6 +184,7 @@ exports.publicPath = `
 	</head>
 	<body>
 		<h1>Public path test</h1>
+		<script type="isodata"></script>
 		<script type="__PREACT_CLI_DATA__">%7B%22preRenderData%22:%7B%22url%22:%22/%22%7D%7D</script>
 		<script crossorigin="anonymous" src="/example-path/bundle.\\w{5}.js" type="module"></script>
 		<script nomodule="" src="/example-path/dom-polyfills.\\w{5}.legacy.js"></script>
