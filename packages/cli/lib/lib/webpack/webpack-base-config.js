@@ -127,9 +127,6 @@ module.exports = function createBaseConfig(env) {
 				'react-dom': require.resolve('preact/compat'),
 				'react/jsx-runtime': require.resolve('preact/jsx-runtime'),
 				'react-addons-css-transition-group': 'preact-css-transition-group',
-				'preact-cli/async-component': require.resolve(
-					'@preact/async-loader/async'
-				),
 			},
 		},
 
@@ -321,7 +318,6 @@ module.exports = function createBaseConfig(env) {
 						},
 					},
 				}),
-			isProd && new webpack.LoaderOptionsPlugin({ minimize: true }),
 			new webpack.optimize.ModuleConcatenationPlugin(),
 
 			// strip out babel-helper invariant checks

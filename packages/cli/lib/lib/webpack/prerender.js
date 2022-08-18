@@ -2,17 +2,18 @@ const { red, yellow } = require('kleur');
 const { resolve } = require('path');
 const { readFileSync } = require('fs');
 const stackTrace = require('stack-trace');
-const URL = require('url');
+const { URL } = require('url');
 const { SourceMapConsumer } = require('source-map');
+const prerender = require('./preact-iso-prerender');
 
-module.exports = function (env, params) {
+module.exports = async function (env, params) {
 	params = params || {};
 
 	let entry = resolve(env.dest, './ssr-build/ssr-bundle.js');
 	let url = params.url || '/';
 
 	global.history = {};
-	global.location = { ...URL.parse(url) };
+	global.location = new URL(url, 'http://localhost');
 
 	try {
 		let m = require(entry),
@@ -25,12 +26,7 @@ module.exports = function (env, params) {
 			);
 			return '';
 		}
-		const { cwd } = env;
-		const preact = require(require.resolve('preact', { paths: [cwd] }));
-		const renderToString = require(require.resolve('preact-render-to-string', {
-			paths: [cwd],
-		}));
-		return renderToString(preact.h(app, { ...params, url }));
+		return (await prerender(app, { ...params, url })).html;
 	} catch (err) {
 		let stack = stackTrace.parse(err).filter(s => s.getFileName() === entry)[0];
 		if (!stack) {

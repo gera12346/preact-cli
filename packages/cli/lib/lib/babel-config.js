@@ -25,6 +25,7 @@ module.exports = function (env) {
 			],
 		].filter(Boolean),
 		plugins: [
+			require.resolve('@rschristian/babel-plugin-webpack-chunk-name-comments'),
 			[require.resolve('@babel/plugin-proposal-decorators'), { legacy: true }],
 			isProd &&
 				require.resolve('babel-plugin-transform-react-remove-prop-types'),

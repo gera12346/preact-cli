@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const { resolve, join } = require('path');
 const { existsSync } = require('fs');
 const { merge } = require('webpack-merge');
-const { filter } = require('minimatch');
 const SizePlugin = require('size-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -14,21 +13,14 @@ const baseConfig = require('./webpack-base-config');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const RefreshPlugin = require('@prefresh/webpack');
-const { normalizePath, warn } = require('../../util');
+const { warn } = require('../../util');
 const OptimizePlugin = require('optimize-plugin');
-
-const cleanFilename = name =>
-	name.replace(
-		/(^\/(routes|components\/(routes|async))\/|(\/index)?\.[jt]sx?$)/g,
-		''
-	);
 
 /**
  * @returns {Promise<import('webpack').Configuration>}
  */
 async function clientConfig(env) {
 	const { source, src } = env;
-	const asyncLoader = require.resolve('@preact/async-loader');
 
 	let entry = {
 		bundle: resolve(__dirname, './../entry'),
@@ -87,43 +79,9 @@ async function clientConfig(env) {
 				}
 				return env.isProd ? '[name].[chunkhash:5].js' : '[name].js';
 			},
-			chunkFilename: '[name].chunk.[chunkhash:5].js',
-		},
-
-		resolveLoader: {
-			alias: {
-				async: asyncLoader,
-			},
-		},
-
-		// automatic async components :)
-		module: {
-			rules: [
-				{
-					test: /\.[jt]sx?$/,
-					include: [
-						filter(source('routes') + '/{*,*/index}.{js,jsx,ts,tsx}'),
-						filter(
-							source('components') +
-								'/{routes,async}/{*,*/index}.{js,jsx,ts,tsx}'
-						),
-					],
-					loader: asyncLoader,
-					options: {
-						name(filename) {
-							filename = normalizePath(filename);
-							let relative = filename.replace(normalizePath(src), '');
-							if (!relative.includes('/routes/')) return false;
-							return 'route-' + cleanFilename(relative);
-						},
-						formatName(filename) {
-							filename = normalizePath(filename);
-							let relative = filename.replace(normalizePath(source('.')), '');
-							return cleanFilename(relative);
-						},
-					},
-				},
-			],
+			chunkFilename: env.isProd
+				? '[name].chunk.[chunkhash:5].js'
+				: '[name].chunk.js',
 		},
 
 		plugins: [
