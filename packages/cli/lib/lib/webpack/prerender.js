@@ -26,7 +26,7 @@ module.exports = async function (env, params) {
 			);
 			return '';
 		}
-		return (await prerender(app, { ...params, url })).html;
+		return (await prerender(app, { props: { ...params, url } })).html;
 	} catch (err) {
 		let stack = stackTrace.parse(err).filter(s => s.getFileName() === entry)[0];
 		if (!stack) {

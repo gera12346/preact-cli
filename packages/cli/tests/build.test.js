@@ -362,7 +362,7 @@ describe('preact build', () => {
 		});
 	});
 
-	describe.skip('prerender', () => {
+	describe('prerender', () => {
 		prerenderUrlFiles.forEach(prerenderUrls => {
 			it(`should prerender the routes provided with '${prerenderUrls}'`, async () => {
 				let dir = await subject('multiple-prerendering');
